@@ -78,10 +78,10 @@ router.get('/me/following',auth,async (req, res) =>{
         await req.user.populate({
         path:"following.follower",
         match,
-/*         options:{
+         options:{
         limit: parseInt(req.query.limit),
         skip:  parseInt(req.query.skip)
-        } */
+        } 
         }).execPopulate()
         const artists = req.user.following.filter((follower)=>{
             return follower.follower
