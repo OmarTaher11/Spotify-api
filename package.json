@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index",
-    "dev": "nodemon src/spotify-api.js "
+    "dev": "env-cmd -f ./src/config/dev.env nodemon src/spotify-api.js "
   },
   "keywords": [],
   "author": "",
@@ -16,11 +16,12 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.5.5",
-    "mongoose": "^5.9.6",
+    "mongodb": "^3.5.6",
+    "mongoose": "^5.9.10",
     "validator": "^13.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "env-cmd": "^10.1.0",
+    "nodemon": "^2.0.3"
   }
 }

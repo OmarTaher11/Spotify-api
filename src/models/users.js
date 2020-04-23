@@ -123,7 +123,7 @@ userSchema.methods.getFollowingStatus =  function(id){
 
 userSchema.methods.genAuthToken = async function(){
     const user = this 
-        const token = jwt.sign({_id: user._id}, "Spotify")
+        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET)
         user.tokens = user.tokens.concat({ token })
         await user.save()
         return token
