@@ -34,7 +34,7 @@ const album= mongoose.Schema({
         
     },
     images:{
-        ///
+        type: Buffer
     },
     name:{
         type:String,

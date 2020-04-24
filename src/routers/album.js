@@ -4,15 +4,16 @@ const jwt = require("jsonwebtoken")
 const auth = require("../middleware/auth")
 const bcrypt = require('bcrypt')
 const router = new express.Router()
+
 //Get album by ID
-router.get('/album/:id',async (req,res)=>{
+router.get('/album/:id', async (req,res)=>{
     try{
-        const album= await Album.findById(req.params.id)
+        const album = await Album.findById(req.params.id)
         if(!album){
             return res.status(400).send({
                 "success": false,
                 "Message":"Their is no such album with this id."
-                })
+            })
         } 
         res.send(album)
     }catch(e){
