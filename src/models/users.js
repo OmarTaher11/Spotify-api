@@ -11,18 +11,21 @@ const userSchema = mongoose.Schema( {
         type: String,
         required: true,
         trim: true
-    },
-    email:{
+    }, email:{
         type:String,
-        unique:true,
         required: true,
+        //unique:true,
         trim: true,
         lowercase: true,
         validate(value){
             if(!validator.isEmail(value))
                 throw new Error('Email is Invalid')
         }
-    },  
+    },
+    emailConfirmation:{
+        type: Boolean,
+        default: false
+    },
     password: {
         type: String,
         required: true,
@@ -55,7 +58,7 @@ const userSchema = mongoose.Schema( {
             }
         },
         image:{
-            // empty for now
+            type: Buffer
         },
             following:[
                 {
@@ -123,7 +126,7 @@ userSchema.methods.getFollowingStatus =  function(id){
 
 userSchema.methods.genAuthToken = async function(){
     const user = this 
-        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET)
+        const token = jwt.sign({_id: user._id}, "Spotify")
         user.tokens = user.tokens.concat({ token })
         await user.save()
         return token
@@ -143,7 +146,10 @@ userSchema.methods.toJSON = function () {
 
 
 userSchema.statics.findByCredentials = async(email, password) =>{
-    const user = await User.findOne({email})
+    const user = await User.findOne({
+        email,
+        emailConfirmation: true
+    })
 
     if(!user){
         throw new Error("unable to login")

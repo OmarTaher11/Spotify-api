@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action={{url}} method="post">
+  <input type="password" placeholder="New Password" name="pswd"id="myInput">
+    <input type="submit" value="Submit">
+  <input type="checkbox" onclick="myFunction()">Show Password
+ 
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+  
+</form>
+
+
+</body>
+</html>
