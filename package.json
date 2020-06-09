@@ -5,7 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index",
-    "dev": "nodemon src/spotify-api.js "
+    "dev": "env-cmd -f ./src/config/dev.env nodemon src/spotify-api.js ",
+    "docs": "jsdoc -c src/docs.json",
+    "seed": "node src/db/seed.js",
+    "test": "env-cmd -f ./src/config/dev.env jest --watch --runInBand",
+    "api": "apidoc -i src/routers"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "keywords": [],
   "author": "",
@@ -19,12 +26,18 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.6",
+    "mongoose-seed": "^0.6.0",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.8",
     "path": "^0.12.7",
     "validator": "^13.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "apidoc": "^0.23.0",
+    "env-cmd": "^10.1.0",
+    "jest": "^26.0.1",
+    "jsdoc": "^3.6.4",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
   }
 }

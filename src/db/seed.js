@@ -1,8 +1,6 @@
 const seeder = require('mongoose-seed');
 
-const db = process.env.MONGODB_URL
-
-seeder.connect('mongodb://127.0.0.1:27017/spotify-dev-database', function(){
+seeder.connect(process.env.MONGODB_URL, function(){
     seeder.loadModels([
         './src/models/users.js',
         './src/models/album.js'
@@ -25,13 +23,54 @@ const data = [
         'model': 'User',
         'documents': [
             {
-                "display_name": "seedtest",
-                "email": "seedtest@gmail.com",
-                "password": "123123123",
-                "country" : "Egypt",
-                "product" : "free",
-                "type" : "artist"
-
+                "emailConfirmation": true,
+                "display_name": "omar",
+                "email": "omar_taher2012@yahoo.com",
+                "password": "12345678",
+                "country" :"egypt",
+                "product": "free",
+                "type": "user"
+            },{
+                "emailConfirmation": true,
+                "display_name": "michael",
+                "email": "michael@yahoo.com",
+                "password": "12345678",
+                "country" :"egypt",
+                "product": "free",
+                "type": "user"
+            },{
+                "emailConfirmation": true,
+                "display_name": "mariz",
+                "password": "12345678",
+                "country" :"egypt",
+                "email": "mariz@yahoo.com",
+                "product": "free",
+                "type": "user",
+            },{
+                "emailConfirmation": true,
+                "display_name": "amr diab",
+                "password": "12345678",
+                "country" :"egypt",
+                "email": "amrdiab@yahoo.com",
+                "product": "premium",
+                "type": "artist",
+            },
+            {
+                "emailConfirmation": true,
+                "display_name": "hamaki",
+                "password": "12345678",
+                "country" :"egypt",
+                "email": "hamaki@yahoo.com",
+                "product": "premium",
+                "type": "artist",
+            },{
+                "emailConfirmation": true,
+                "display_name": "hamo bika",
+                "password": "12345678",
+                "country" :"egypt",
+                "email": "hamobika@yahoo.com",
+                "product": "premium",
+                "type": "artist",
             }
         ]
     },

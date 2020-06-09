@@ -1,10 +1,10 @@
 const nodemailer = require('nodemailer')
-const url = "http://localhost:3000/"
+const url = process.env.DOMAIN // || Real domain 
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: "spotifybackend@gmail.com",
-      pass: "Omar12345"
+      user: process.env.EMAIL ,
+      pass: process.env.PASSWORD
     },
     tls: {
       rejectUnauthorized: false
@@ -12,26 +12,40 @@ let transporter = nodemailer.createTransport({
   })
 
 
+/**
+ * @example
+ * let email = "omar@gmail.com "
+ * let token = jwt.sign(id)
+ * sendVerification(email , token)
+ * 
+ * @param {string} email email of the user need to be verified 
+ * @param {string} token the the request path to verify the email
+ */
 const sendVerification = (email , token) => {
-   
-
-              let mailOptions = {
-                        from: "spotifybackend@gmail.com",
-                        to: email,
-                        subject: 'Please verify you email ',
-                        text: "click on this link to verify your email : "+url+'verify?token='+token
-                      }
-                transporter.sendMail(mailOptions, function (error, info) {
-                        if (error) {
-                          return console.log(error)
-                        } else {
-                         return console.log("sent")
-                        }
-                    })
-
+  let mailOptions = {
+        from: "spotifybackend@gmail.com",
+        to: email,
+        subject: 'Please verify you email ',
+        text: "click on this link to verify your email : "+url+'verify?token='+token
+    }
+  transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+          return new Error("cannot send this email")
+       } else {
+        
+    }
+  })
 }
 
-
+/**
+ * @example
+ * let email = "omar@gmail.com "
+ * let token = jwt.sign(id)
+ * sendForgotPassword(email , token)
+ * 
+ * @param {string} email email of the user need to be verified 
+ * @param {string} token the the request path to enter new password
+ */
 const sendForgotPassword= (email , token) => {
    
 
@@ -43,14 +57,22 @@ const sendForgotPassword= (email , token) => {
             }
       transporter.sendMail(mailOptions, function (error, info) {
               if (error) {
-                return console.log(error)
+                return new Error("cannot send this email")
               } else {
-               return console.log("sent")
+               
               }
           })
 
 }
-
+/**
+ * @example
+ * let email = "omar@gmail.com "
+ * let token = jwt.sign(id)
+ * sendUpgrade(email , token)
+ * 
+ * @param {string} email email of the user need to be verified 
+ * @param {string} token the the request path to upgrade the user
+ */
 const sendUpgrade = (email , token) => {
    
 
@@ -62,9 +84,9 @@ const sendUpgrade = (email , token) => {
             }
       transporter.sendMail(mailOptions, function (error, info) {
               if (error) {
-                return console.log(error)
+               return  new Error("cannot send this email")
               } else {
-               return console.log("sent")
+               
               }
           })
 
@@ -75,41 +97,3 @@ module.exports = {
     sendForgotPassword,
     sendUpgrade 
 }
-// const main = async function (){
-//       let transporter = nodemailer.createTransport({
-//         service: 'gmail',
-//         auth: {
-//           user: "spotifybackend@gmail.com",
-//           pass: "Omar12345"
-//         },
-//         tls: {
-//           rejectUnauthorized: false
-//         }
-//       })
-    
-//       //let global = process.env.GLOBAL || 'false'
-//       //var url = config.get('FrontUrl')
-    
-//       //if (global === 'true') {
-//         //url = config.get('globalFrontUrl')
-//       //}
-    
-//       let mailOptions = {
-//         from: "spotifybackend@gmail.com",
-//         to: "omar_taher2012@yahoo.com",
-//         subject: 'eshtaghalet keda ysta ',
-//         text:"testing number 1"
-//       }
-    
-//       await transporter.sendMail(mailOptions, function (error, info) {
-//         if (error) {
-//           return console.log(error)//res.status(500).send('Unable to send email')
-//         } else {
-//           //winston.info('Email sent to: ' + user.email)
-//           return console.log("sent")//res.json({
-//             //msg: 'Check your mail to reset your password.'
-//           //})
-//         }
-//       })
-//     }
-//   main()
