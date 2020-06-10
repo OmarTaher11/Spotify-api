@@ -8,7 +8,7 @@
     "dev": "env-cmd -f ./src/config/dev.env nodemon src/spotify-api.js ",
     "docs": "jsdoc -c src/docs.json",
     "seed": "node src/db/seed.js",
-    "test": "env-cmd -f ./src/config/dev.env jest --watch --runInBand",
+    "test": "env-cmd -f ./src/config/dev.env jest --runInBand",
     "api": "apidoc -i src/routers"
   },
   "jest": {

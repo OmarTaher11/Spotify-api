@@ -2,11 +2,16 @@ const express = require('express')
  require('../src/db/mongoose')
 const userRouter = require('./routers/user')
 const followRouter = require('../src/routers/follower')
+const albumRouter = require('./routers/album')
+const artistRouter = require('./routers/artist')
+const playlistmanagerRouter = require('./routers/playlistmanager')
+const audioplayerRouter = require('./routers/audioplayer')
 const app = express()
 app.use(express.json())
 app.use(userRouter)
 app.use(followRouter) 
-
-
-
+app.use(albumRouter)
+app.use(artistRouter)
+app.use(playlistmanagerRouter)
+app.use(audioplayerRouter)
 module.exports = app

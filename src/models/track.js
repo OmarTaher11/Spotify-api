@@ -16,11 +16,17 @@ const track=mongoose.Schema({
         type:String,
         required: true,
         trim: true
+        
     },
     type:{
         type:String,
         required: true,
-        trim: true
+        trim: true,
+        validate(value){
+           if(isNaN(value)=== false)
+            throw new Error("Track type can't be a number")
+          
+        }
     },
     track_number:{
         type: Number
@@ -29,12 +35,15 @@ const track=mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref: 'Album'
     },
-    artist:[{
+    artists:[{
         artist:{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Artist'
         }
-    }]
+    }],
+    genre:{
+        type:String
+    }
 })
 const Track=mongoose.model('Track',track)
 module.exports=Track

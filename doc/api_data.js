@@ -1,3 +1,6 @@
+import { Mongoose } from "mongoose";
+import { ObjectID } from "mongodb";
+
 define({ "api": [
   {
     "type": "post",
@@ -1133,6 +1136,8 @@ define({ "api": [
     "filename": "src/routers/follower.js",
     "groupTitle": "follow"
   },
+  
+  
   {
     "type": "Get",
     "url": "/me/following",
@@ -1149,7 +1154,14 @@ define({ "api": [
             "optional": false,
             "field": "Authorization",
             "description": "<p>access token</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains user info</p>"
           }
+        
         ]
       }
     },
@@ -1279,5 +1291,1012 @@ define({ "api": [
     },
     "filename": "src/routers/follower.js",
     "groupTitle": "follow"
+  },
+  /////////////////////////////////////////////////////
+  {
+    "type":"Post",
+    "url": "/artist",
+    "title": "Add Album",
+    "name": "Post/Add_Album",
+    "group": "user",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "album_type",
+            "description": "<p>album type</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": ObjectId,
+            "optional": true,
+            "field": "artists",
+            "description": "<p>album artists</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": ObjectId ,
+            "optional": true,
+            "field": "copyrights",
+            "description": "<p>the album's copyrights</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": [{
+              "item":{
+                "type":"String"
+              }
+            }],
+            "optional": true,
+            "field": "genres",
+            "description": "<p>the album's genres</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "href",
+            "description": "<p>the album's href</p>" 
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "genre",
+            "description": "<p>the track genre/p>"
+          },
+          {
+            "group": "Parameter",
+            "type": Buffer,
+            "optional": true,
+            "field": "image",
+            "description": "<p>the album image</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>the album name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": Number,
+            "optional": true,
+            "field": "popularity",
+            "description": "<p>the album's popularity</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "release_date",
+            "description": "<p>the album's release date</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": [{
+              "item":{
+                "type": ObjectId
+              }
+            }
+
+            ],
+            "optional": true,
+            "field": "tracks",
+            "description": "<p>the album tracks</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "type",
+            "description": "<p>the album type</p>"
+          }
+          
+        ]
+      }
+    },
+    "version": "0.1.0",
+    "success":{
+      "fields":{
+        "Success 200":[
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains album info</p>"
+          }
+
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains album info</p>"
+          }
+        ]
+      },     
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 ",
+          "content": "HTTP/1.1 200 \n {\n        \"_id\":\"sadsfgfhgdfssdfghghjhgfd\",\n             \"name\":\"Darth Vader\",\n            \"album_type\":\"Jazz\",\n            \"artists\":\[]\,\n         \"copyrights\":\[]\,\n      \"genres\":\[]\,\n               \"tracks\":\[]\,\n       \"__v\":12\n        }\n",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "400",
+            "optional": false,
+            "field": "headerStatusError",
+            "description": "<p>the header status code is an error code</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 404 ",
+          "content": "HTTP/1.1 404 \n{\n\"success\":\false\,\n \"Message\": \"faild to complete the process\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routers/artist.js",
+    "groupTitle": "user"
+     
+  },
+  {
+    "type":"Post",
+    "url": "/artist/newtrack",
+    "title": "Add Track",
+    "name": "Post/add_track",
+    "group": "user",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": Number,
+            "optional": true,
+            "field": "disco_no",
+            "description": "<p>track disco no</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": Number,
+            "optional": true,
+            "field": "duration",
+            "description": "<p>track duration</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>the track's name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "type",
+            "description": "<p>the track type</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": Number,
+            "optional": true,
+            "field": "track_number",
+            "description": "<p>the track number</p>" 
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "genre",
+            "description": "<p>the track genre/p>"
+          },
+          {
+            "group": "Parameter",
+            "type": ObjectId,
+            "optional": true,
+            "field": "album",
+            "description": "<p>the track album</p>"
+          }
+          
+        ]
+      }
+    },
+    "success":{
+      "fields":{
+        "Success 200":[
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains track info</p>"
+          }
+
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains track info</p>"
+          }
+        ]
+      },     
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 ",
+          "content": "HTTP/1.1 200 \n   {\n                \"_id\":\"5ed3de4ece405309f40a0cd0\",\n            \"disc_no\":\3\,\n            \"duration\":\3\,\n            \"name\":\"Honesty\",\n            \"href\":\"https://www.spotify.com/watch?v=wXhMqDotfLk&list=RDwXhMqDotfLk&start_radio=1\",\n            \"type\":\"Pop\",\n     \"track_number\":\3\,\n      \"album\":\"5ed3cf6440dfa136b869631c\",\n \"artists\":\[]\,\n   \"__v\":1\n        }\n",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "400",
+            "optional": false,
+            "field": "headerStatusError",
+            "description": "<p>the header status code is an error code</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 404 ",
+          "content": "HTTP/1.1 400 \n{\n \"success\": \false\,\n \"Message\": \"There is no album with this id\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routers/artist.js",
+    "groupTitle": "user"
+
+  },
+  {
+    "type":"Delete",
+    "url": "/artists/:id",
+    "title": "Delete Album",
+    "name": "Delete/delete_album",
+    "group": "user",
+    "version": "0.1.0",
+    "success":{
+      "fields":{
+        "Success 200":[
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of operation</p>"
+          }
+
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of operation</p>"
+          }
+        ]
+      },     
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 ",
+          "content": "HTTP/1.1 200 \n[\n    {\n        \"success\":\"true\",\n                                     \"Message\":\"Album was successfully removed\",\n        }\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "400",
+            "optional": false,
+            "field": "headerStatusError",
+            "description": "<p>the header status code is an error code</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 ",
+          "content": "HTTP/1.1 400 \n{\nmessage: \"There is no album with this id\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routers/artist.js",
+    "groupTitle": "user"
+  },
+  {
+    "type":"Delete",
+    "url": "/artist/:id",
+    "title": "Delete a track",
+    "name": "Delete/delete_track",
+    "group": "user",
+    "version": "0.1.0",
+    "success":{
+      "fields":{
+        "Success 200":[
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of operation</p>"
+          }
+
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of operation</p>"
+          }
+        ]
+      },     
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 ",
+          "content": "HTTP/1.1 200 \n[\n    {\n        \"success\":\"true\",\n                                     \"Message\":\"Track was removed successfully\",\n        }\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "400",
+            "optional": false,
+            "field": "headerStatusError",
+            "description": "<p>the header status code is an error code</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 ",
+          "content": "HTTP/1.1 400 \n{\nmessage: \"There is no track with this id\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routers/artist.js",
+    "groupTitle": "artist"
+  },
+  {
+    "type":"Put",
+    "url": "/artistalbum/:id",
+    "title": "Edit album",
+    "name": "Put/edit_album",
+    "group": "user",
+    "version": "0.1.0",
+    "success":{
+      "fields":{
+        "Success 200":[
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains album after edit</p>"
+          }
+
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of operation</p>"
+          }
+        ]
+      },     
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 ",
+          "content": "HTTP/1.1 200 \n    {\n        \"_id\":\"sadsfgfhgdfssdfghghjhgfd\",\n        \"album\":{\n            \"_id\":\"asdfghjkjhgfdsaSDFGHJ\",\n            \"name\":\"Darth Vader\",\n            \"album_type\":\"Jazz\",\n            \"artists\":\[]\,\n         \"copyrights\":\[]\,\n      \"genres\":\[]\,\n               \"tracks\":\[]\,\n       \"__v\":12\n        }\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "400",
+            "optional": false,
+            "field": "headerStatusError",
+            "description": "<p>the header status code is an error code</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 ",
+          "content": "HTTP/1.1 400 \n{\nmessage: \"There is no album with this id\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routers/artist.js",
+    "groupTitle": "user"
+  },
+  {
+    "type":"Put",
+    "url": "/artist/:id",
+    "title": "Edit track",
+    "name": "Put/edit_track",
+    "group": "user",
+    "version": "0.1.0",
+    "success":{
+      "fields":{
+        "Success 200":[
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains album after edit</p>"
+          }
+
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of operation</p>"
+          }
+        ]
+      },     
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 ",
+          "content": "HTTP/1.1 200 \n    {\n        \"_id\":\"5ed3de4ece405309f40a0cd0\",\n        \"track\":{\n            \"_id\":\"5ed3de4ece405309f40a0cd0\",\n            \"disc_no\":\3\,\n            \"duration\":\3\,\n            \"name\":\"Honesty\",\n         \"href\":\"https://www.youtube.com/watch?v=wXhMqDotfLk&list=RDwXhMqDotfLk&start_radio=1\",\n      \"type\":\"Pop\",\n               \"track_number\":\3\,\n       \"__v\":1\n        }\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "404",
+            "optional": false,
+            "field": "headerStatusError",
+            "description": "<p>the header status code is an error code</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 404 ",
+          "content": "HTTP/1.1 404 \n {\n \"success\":\false\,\n \"Message\": \"There is no track with this id\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routers/artist.js",
+    "groupTitle": "artist"
+  },
+  {
+    "type":"Put",
+    "url": "/artist/:id/:id2",
+    "title": "Add a track to an album",
+    "name": "Put/add_a_track_to_an_album",
+    "group": "user",
+    "version": "0.1.0",
+    "success":{
+      "fields":{
+        "Success 200":[
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains album after edit</p>"
+          }
+
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of operation</p>"
+          }
+        ]
+      },     
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 ",
+          "content": "HTTP/1.1 200 \n    {\n        \"success\":\true\,\n                   \"Message\":\"Track successfully added\"\n        }\n",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "404",
+            "optional": false,
+            "field": "headerStatusError",
+            "description": "<p>the header status code is an error code</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 ",
+          "content": "HTTP/1.1 400 \n {\n \"success\":\false\,\n \"Message\": \"Track already exists\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routers/artist.js",
+    "groupTitle": "user"
+  },
+  {
+    "type":"Put",
+    "url": "/artist/:id/:id2",
+    "title": "Remove Track from Album",
+    "name": "Put/remove_a_track_to_an_album",
+    "group": "user",
+    "version": "0.1.0",
+    "success":{
+      "fields":{
+        "Success 200":[
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains status of operation</p>"
+          }
+
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of operation</p>"
+          }
+        ]
+      },     
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 ",
+          "content": "HTTP/1.1 200 \n    {\n        \"success\":\true\,\n                   \"Message\":\"Successfully removed\"\n        }\n",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "404",
+            "optional": false,
+            "field": "headerStatusError",
+            "description": "<p>the header status code is an error code</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 404 ",
+          "content": "HTTP/1.1 404 \n {\n \"success\":\false\,\n \"Message\": \"Can't find album\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routers/artist.js",
+    "groupTitle": "user"
+  },
+  {
+    "type":"Get",
+    "url": "/audioplayer",
+    "title": "Show tracks by genres",
+    "name": "Get/show_tracks_by_genres",
+    "group": "track",
+    "version": "0.1.0",
+    "success":{
+      "fields":{
+        "Success 200":[
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the tracks with this genre</p>"
+          }
+
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the tracks with this genre</p>"
+          }
+        ]
+      },     
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 ",
+          "content": "HTTP/1.1 200 \n   [\n {\n \"_id\":\"5edf9ae8ac8ee42eb882ccb7\",\n \"disc_no\":\3\,\n \"duration\":\3\,\n \"name\":\"Beautiful\"\,\n \"href\":\"https://www.youtube.com/watch?v=fdxfemd2edQ\",\n \"type\":\"Folk\",\n \"track_number\":\3\,\n \"genre\": \"Indie\",\n \"artists\": \[]\,\n \"__v\": \0\,\n },\n ]\n",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "404",
+            "optional": false,
+            "field": "headerStatusError",
+            "description": "<p>the header status code is an error code</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 404 ",
+          "content": "HTTP/1.1 404 \n {\n \"success\":\false\,\n \"Message\": \"No tracks found for this genre\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routers/audioplayer.js",
+    "groupTitle": "playlist"
+  },
+  {
+    "type":"Put",
+    "url": "/playlistmanager/:id/:id2",
+    "title": "Add track to a playlist",
+    "name": "Put/add_track_to_a_playlist",
+    "group": "playlist",
+    "version": "0.1.0",
+    "success":{
+      "fields":{
+        "Success 200":[
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of the operation</p>"
+          }
+
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of the operation</p>"
+          }
+        ]
+      },     
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 ",
+          "content": "HTTP/1.1 200 \n    {\n \"sucess\":\true\,\n \"Message\":\"Track is added to playlist successfully\"\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "404",
+            "optional": false,
+            "field": "headerStatusError",
+            "description": "<p>the header status code is an error code</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 404 ",
+          "content": "HTTP/1.1 404 \n {\n \"success\":\false\,\n \"Message\": \"This track doesn't exist create one first\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routers/playlistmanager.js",
+    "groupTitle": "playlist"
+  },
+  {
+    "type":"Put",
+    "url": "/playlistmanager/:id/:id2",
+    "title": "Remove a track from playlist",
+    "name": "Put/remove_a_track_from_playlist",
+    "group": "playlist",
+    "version": "0.1.0",
+    "success":{
+      "fields":{
+        "Success 200":[
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },{
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of the operation</p>"
+          }
+
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "200",
+            "optional": false,
+            "field": "request",
+            "description": "<p>ok http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "json",
+            "optional": false,
+            "field": "response",
+            "description": "<p>The response body contains the status of the operation</p>"
+          }
+        ]
+      },     
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 ",
+          "content": "HTTP/1.1 200 \n    {\n \"sucess\":\true\,\n \"Message\":\"Track was deleted successfully\"\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "404",
+            "optional": false,
+            "field": "headerStatusError",
+            "description": "<p>the header status code is an error code</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "HTTP/1.1 404 ",
+          "content": "HTTP/1.1 404 \n {\n \"success\":\false\,\n \"Message\": \"Can't find track with this id\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/routers/playlistmanager.js",
+    "groupTitle": "playlist"
   }
 ] });

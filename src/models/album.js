@@ -6,7 +6,11 @@ const album= mongoose.Schema({
     album_type:{
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        validate(value){
+            if(isNaN(value)===false)
+            throw new Error("Album type can't be a number")
+        }
     },
     artists:[{
         
@@ -53,10 +57,8 @@ const album= mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Track'
         }
-    }],
-    type:{
-        type:String
-    }
+    }]
+
 })
 const Album=mongoose.model('Album',album)
 module.exports=Album
